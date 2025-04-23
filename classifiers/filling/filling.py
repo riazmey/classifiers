@@ -9,7 +9,7 @@ from classifiers.models import Unit
 
 @transaction.atomic
 def filling_currency():
-    if settings.DEBUG:
+    if settings.DEBUG == True:
         print('Filling currency data:')
     path_file = f'{os.getcwd()}/classifiers/filling/currency.json'
     with open(path_file, 'r') as file:
@@ -26,12 +26,12 @@ def filling_currency():
             data_object, created = Currency.objects.update_or_create(code_dec=code_dec, defaults=defaults)
             if created | settings.DEBUG == True:
                 print(f' Create/update currency: {data_object.repr}')
-        if settings.DEBUG:
+        if settings.DEBUG == True:
             print('')
 
 @transaction.atomic
 def filling_unit():
-    if settings.DEBUG:
+    if settings.DEBUG == True:
         print('Filling units of measurement:')
     path_file = f'{os.getcwd()}/classifiers/filling/unit.json'
     with open(path_file, 'r') as file:
@@ -52,7 +52,7 @@ def filling_unit():
             data_object, created = Unit.objects.update_or_create(code_dec=code_dec, defaults=defaults)
             if created | settings.DEBUG == True:
                 print(f' Create/update unit: {data_object.repr}')
-        if settings.DEBUG:
+        if settings.DEBUG == True:
             print('')
 
 def filling_all():
