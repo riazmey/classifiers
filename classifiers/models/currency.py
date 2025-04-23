@@ -24,7 +24,7 @@ class Currency(models.Model):
         verbose_name='Имя'
     )
     repr = models.CharField(
-        max_length=60,
+        max_length=256,
         default='',
         blank=True,
         verbose_name='Валюта'

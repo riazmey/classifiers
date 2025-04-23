@@ -41,7 +41,7 @@ class Unit(models.Model):
         verbose_name='Код бквенный (международный)'
     )
     repr = models.CharField(
-        max_length=60,
+        max_length=256,
         default='',
         blank=True,
         verbose_name='Единица измерения'
