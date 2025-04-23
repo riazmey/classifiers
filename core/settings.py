@@ -10,12 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 '''
 
-import os
+import environ
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
 
 def getenv(name: str, default: any) -> any:
-    result = os.getenv(name)
+    env = environ.Env()
+    env.read_env(parse_comments=True)
+    result = env(name)
     if result:
         match result.lower:
             case 'true':
