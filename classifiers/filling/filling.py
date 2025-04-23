@@ -24,8 +24,11 @@ def filling_currency():
                 'name': item_data.get('name', '')
             }
             data_object, created = Currency.objects.update_or_create(code_dec=code_dec, defaults=defaults)
-            if created == True and settings.DEBUG == True:
-                print(f' Create/update currency: {data_object.repr}')
+            if settings.DEBUG == True:
+                if created == True:
+                    print(f' Created currency: {data_object.repr}')
+                else:
+                    print(f' Update currency: {data_object.repr}')
         if settings.DEBUG == True:
             print('')
 
@@ -50,8 +53,11 @@ def filling_unit():
                 'repr': item_data.get('repr', ''),
             }
             data_object, created = Unit.objects.update_or_create(code_dec=code_dec, defaults=defaults)
-            if created == True and settings.DEBUG == True:
-                print(f' Create/update unit: {data_object.repr}')
+            if settings.DEBUG == True:
+                if created == True:
+                    print(f' Created unit: {data_object.repr}')
+                else:
+                    print(f' Update unit: {data_object.repr}')
         if settings.DEBUG == True:
             print('')
 

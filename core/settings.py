@@ -20,14 +20,17 @@ from django.core.management.utils import get_random_secret_key
 def getenv(name: str, default: any) -> any:
     env = environ.Env()
     env.read_env(parse_comments=True)
-    result = env(name)
-    if result:
-        match result.lower:
-            case 'true':
-                result = True
-            case 'false':
-                result = False
-    else:
+    try:
+        result = env(name)
+        if result:
+            match result.lower:
+                case 'true':
+                    result = True
+                case 'false':
+                    result = False
+        else:
+            result = default
+    except:
         result = default
     return result
 
