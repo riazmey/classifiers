@@ -7,6 +7,15 @@ services:
     volumes:
       - /data/classifiers-app/migrations:/app/classifiers/app/migrations/:rw
       - /data/classifiers-app/settings:/app/classifiers/core/settings/:rw
+    environment:
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
+      - DATABASE_DB=${DATABASE_DB}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
     networks:
       default:
         ipv4_address: ${NETWORK_IP_APP}
