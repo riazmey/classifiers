@@ -16,6 +16,7 @@ services:
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_PORT=${DATABASE_PORT}
+      - WEB_PORT=${WEB_PORT}
     networks:
       default:
         ipv4_address: ${NETWORK_IP_APP}
