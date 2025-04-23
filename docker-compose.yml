@@ -2,16 +2,16 @@ services:
 
   classifiers-app:
     container_name: classifiers-app
-    hostname: 'classifiers-app.${NETWORK_DOMAINNAME}'
+    hostname: classifiers-app
     image: riazmey/classifiers-app:latest
     volumes:
       - /data/classifiers-app/migrations:/app/classifiers/app/migrations/:rw
       - /data/classifiers-app/settings:/app/classifiers/core/settings/:rw
     networks:
-      local_network:
+      default:
         ipv4_address: ${NETWORK_IP_APP}
     ports:
-      - '8000:8000'
+      - '${WEB_PORT}:${WEB_PORT}'
     command: '/app/classifiers/docker-entrypoint-app.sh'
     healthcheck:
       test: [ 'CMD', 'curl --fail http://localhost:8000/ || exit 1' ]
@@ -24,7 +24,7 @@ services:
 
   classifiers-psql:
     container_name: classifiers-psql
-    hostname: 'classifiers-psql.${NETWORK_DOMAINNAME}'
+    hostname: classifiers-psql
     image: riazmey/classifiers-psql:latest
     shm_size: 128mb
     environment:
@@ -33,10 +33,10 @@ services:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - PGDATA=/var/lib/postgresql/data/pgdata
     networks:
-      local_network:
+      default:
         ipv4_address: ${NETWORK_IP_PSQL}
     ports:
-      - "${DATABASE_PORT}:5432"
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
     volumes:
       - source: /data/classifiers-psql
         target: /var/lib/postgresql/data
@@ -47,7 +47,7 @@ services:
       - type: tmpfs
         target: /var/run/postgresql
         read_only: false
-    command: [ "psql", "-U", "${DATABASE_USER}", "-h", "${DATABASE_HOST}", "-p", "${DATABASE_PORT}" ]
+    command: -p ${DATABASE_PORT}
     healthcheck:
       test: [ 'CMD-SHELL', 'pg_isready -U ${DATABASE_USER}' ]
       interval: 10s
@@ -59,11 +59,8 @@ services:
 
 networks:
 
-  local_network:
-    driver: macvlan
-    driver_opts:
-      parent: ${NETWORK_INTERFACE}
+  default:
+    driver: bridge
     ipam:
       config:
         - subnet: ${NETWORK_SUBNET}
-          gateway: ${NETWORK_GATEWAY}
