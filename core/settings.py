@@ -52,7 +52,7 @@ DATABASE_DB = getenv('DATABASE_DB', '')
 if DATABASE_DB: 
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': getenv('DATABASE_DB', ''),
             'USER': getenv('DATABASE_USER', ''),
             'PASSWORD': getenv('DATABASE_PASSWORD', ''),
