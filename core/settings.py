@@ -147,3 +147,10 @@ REST_FRAMEWORK = {
         'rest_framework.renders.BrowsableAPIRenderer',
     ]
 }
+
+if DEBUG:
+    print('Debug view environments vars:')
+    print(f'    DEBUG: {DEBUG}')
+    print(f'    SECRET_KEY: {SECRET_KEY}')
+    print(f'    ALLOWED_HOSTS: {ALLOWED_HOSTS}')
+    print(f'    DATABASES: {DATABASES}')
