@@ -13,21 +13,59 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
+import environ
+from pathlib import Path
+from django.core.management.utils import get_random_secret_key
+
+def getenv(name: str, default: any) -> any:
+    env = environ.Env()
+    env.read_env(parse_comments=True)
+    result = env(name)
+    if result:
+        match result.lower:
+            case 'true':
+                result = True
+            case 'false':
+                result = False
+    else:
+        result = default
+    return result
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # SECURITY WARNING: keep the secret key used in production secret!
-# See .environ.py
-#SECRET_KEY = ''
+SECRET_KEY = getenv('DJANGO_SECRET_KEY', get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# See .environ.py
-#DEBUG = False
+DEBUG = getenv('DJANGO_DEBUG', True)
 
+ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
-# See .environ.py
-#ALLOWED_HOSTS = ['*']
+# Database
+# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+DATABASE_DB = getenv('DATABASE_DB', '')
 
+if DATABASE_DB: 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': getenv('DATABASE_DB', ''),
+            'USER': getenv('DATABASE_USER', ''),
+            'PASSWORD': getenv('DATABASE_PASSWORD', ''),
+            'HOST': getenv('DATABASE_HOST', '127.0.0.1'),
+            'PORT': getenv('DATABASE_PORT', '5432')
+        }
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -68,11 +106,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-# See .environ.py
 
 
 # Password validation

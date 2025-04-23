@@ -18,4 +18,3 @@ RUN echo "Europe/Moscow" > /etc/timezone
 # Add locale initdb
 ENV POSTGRES_INITDB_ARGS="--locale-provider=icu --icu-locale=ru-RU"
 
-#CMD ["bash"]
