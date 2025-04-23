@@ -1,7 +1,6 @@
 
 import os
 import json
-import importlib.resources
 
 from django.db import transaction
 from django.conf import settings
@@ -25,7 +24,7 @@ def filling_currency():
                 'name': item_data.get('name', '')
             }
             data_object, created = Currency.objects.update_or_create(code_dec=code_dec, defaults=defaults)
-            if created | settings.DEBUG:
+            if created | settings.DEBUG == True:
                 print(f' Create/update currency: {data_object.repr}')
         if settings.DEBUG:
             print('')
@@ -51,7 +50,7 @@ def filling_unit():
                 'repr': item_data.get('repr', ''),
             }
             data_object, created = Unit.objects.update_or_create(code_dec=code_dec, defaults=defaults)
-            if created | settings.DEBUG:
+            if created | settings.DEBUG == True:
                 print(f' Create/update unit: {data_object.repr}')
         if settings.DEBUG:
             print('')
