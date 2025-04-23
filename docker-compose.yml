@@ -21,6 +21,13 @@ services:
       - .
     ports:
       - '${WEB_PORT}:${WEB_PORT}'
+    volumes:
+      - source: /data/classifiers-app/migrations
+        target: /app/classifiers/classifiers/migrations
+        read_only: false
+        type: bind
+        bind:
+          create_host_path: true
     command: python /app/classifiers/manage.py runserver 0.0.0.0:${WEB_PORT}
     healthcheck:
       test: [ 'CMD-SHELL', 'curl --fail http://docker.ltlog.local:${WEB_PORT}/manage || exit 1' ]
