@@ -5,7 +5,12 @@ services:
     hostname: classifiers-app
     image: riazmey/classifiers-app:latest
     volumes:
-      - /data/classifiers-app/migrations:/app/classifiers/classifiers/migrations/:rw
+      - source: /data/classifiers-app/migrations
+        target: /app/classifiers/classifiers/migrations
+        read_only: false
+        type: bind
+        bind:
+          create_host_path: true
     environment:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=${DJANGO_DEBUG}
