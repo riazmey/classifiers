@@ -5,8 +5,7 @@ services:
     hostname: classifiers-app
     image: riazmey/classifiers-app:latest
     volumes:
-      - /data/classifiers-app/migrations:/app/classifiers/app/migrations/:rw
-      - /data/classifiers-app/settings:/app/classifiers/core/settings/:rw
+      - /data/classifiers-app/migrations:/app/classifiers/classifiers/migrations/:rw
     environment:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=${DJANGO_DEBUG}
