@@ -15,14 +15,15 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # See .environ.py
-#SECRET_KEY = 'django-insecure-...'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # See .environ.py
-#DEBUG = True
+DEBUG = False
+
 
 # See .environ.py
-#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

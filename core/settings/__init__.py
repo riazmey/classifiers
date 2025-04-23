@@ -6,11 +6,9 @@ try:
 except ImportError:
     from .environ import *
 
-print('Debug view environments vars:')
 if DEBUG:
-    print(f'    SECRET_KEY: {SECRET_KEY}')
+    print('Debug view environments vars:')
     print(f'    DEBUG: {DEBUG}')
+    print(f'    SECRET_KEY: {SECRET_KEY}')
     print(f'    ALLOWED_HOSTS: {ALLOWED_HOSTS}')
     print(f'    DATABASES: {DATABASES}')
-else:
-    print(f'    DEBUG: {DEBUG}')
