@@ -1,10 +1,10 @@
 
-from main import *
+from .main import *
 
 try:
-    from local import * # type: ignore
+    from .local import *
 except ImportError:
-    from environ import *
+    from .environ import *
 
 print('Debug view environments vars:')
 if DEBUG:
