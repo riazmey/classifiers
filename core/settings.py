@@ -57,7 +57,7 @@ if DATABASE_DB:
             'USER': getenv('DATABASE_USER', ''),
             'PASSWORD': getenv('DATABASE_PASSWORD', ''),
             'HOST': getenv('DATABASE_HOST', '127.0.0.1'),
-            'PORT': getenv('DATABASE_PORT', '5432')
+            'PORT': getenv('DATABASE_PORT', 5432)
         }
     }
 else:
