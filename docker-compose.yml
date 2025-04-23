@@ -28,9 +28,9 @@ services:
       - .
     ports:
       - '${WEB_PORT}:${WEB_PORT}'
-    command: '/app/classifiers/docker-entrypoint-app.sh'
+    command: '/app/classifiers/python manage.py runserver 0.0.0.0:${WEB_PORT}'
     healthcheck:
-      test: [ 'CMD-SHELL', 'curl --fail http://docker:${WEB_PORT}/manage || exit 1' ]
+      test: [ 'CMD-SHELL', 'curl --fail http://docker.ltlog.local:${WEB_PORT}/manage || exit 1' ]
       interval: 10s
       timeout: 5s
       retries: 5
