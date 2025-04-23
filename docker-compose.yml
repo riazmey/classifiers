@@ -24,8 +24,8 @@ services:
     networks:
       default:
         ipv4_address: ${NETWORK_IP_APP}
-        dns_search:
-          - local
+    dns_search:
+      - .
     ports:
       - '${WEB_PORT}:${WEB_PORT}'
     command: '/app/classifiers/docker-entrypoint-app.sh'
@@ -51,8 +51,8 @@ services:
     networks:
       default:
         ipv4_address: ${NETWORK_IP_PSQL}
-        dns_search:
-          - local
+    dns_search:
+      - .
     ports:
       - "${DATABASE_PORT}:${DATABASE_PORT}"
     volumes:
