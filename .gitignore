@@ -1,5 +1,8 @@
 # Django
-app/migrations/*
+**/migrations/
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
 
 # DB
 *.sqlite3
