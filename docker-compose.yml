@@ -24,7 +24,7 @@ services:
       - '${WEB_PORT}:${WEB_PORT}'
     command: '/app/classifiers/docker-entrypoint-app.sh'
     healthcheck:
-      test: [ 'CMD-SHELL', 'curl --fail http://${EXTERNAL_IP}:${WEB_PORT}/ || exit 1' ]
+      test: [ 'CMD-SHELL', 'curl --fail http://docker:${WEB_PORT}/ || exit 1' ]
       interval: 10s
       timeout: 5s
       retries: 5
