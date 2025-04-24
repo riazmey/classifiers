@@ -1,7 +1,8 @@
 
 from django.contrib import admin
-from .models import Currency
-from .models import Unit
+from classifiers.models import Currency
+from classifiers.models import Unit
+from classifiers.models import RatesVAT
 
 class CurrencyAdmin(admin.ModelAdmin):
     fields = ['name', ('code_dec', 'code_str')]
@@ -15,5 +16,12 @@ class UnitAdmin(admin.ModelAdmin):
     search_fields = ['code_dec', 'notation_national', 'code_national', 'name']
     ordering = ['id']
 
+class RatesVATAdmin(admin.ModelAdmin):
+    fields = ['repr', 'code_str', 'rate']
+    list_display = ['code_str', 'repr', 'rate']
+    search_fields = ['rate', 'repr']
+    ordering = ['rate']
+
 admin.site.register(Currency, CurrencyAdmin)
 admin.site.register(Unit, UnitAdmin)
+admin.site.register(RatesVAT, RatesVATAdmin)

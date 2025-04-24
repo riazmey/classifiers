@@ -5,7 +5,9 @@ class RatesVAT(models.Model):
 
     class Meta:
         indexes = [
-            models.Index(fields=['code_str'])
+            models.Index(fields=['code_str']),
+            models.Index(fields=['rate']),
+            models.Index(fields=['repr'])
         ]
         ordering = ['rate']
         verbose_name = 'Ставка НДС'
