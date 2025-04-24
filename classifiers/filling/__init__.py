@@ -10,9 +10,11 @@
 from .filling import filling_all
 from .filling import filling_currency
 from .filling import filling_unit
+from .filling import filling_rates_vat
 
 __all__ = [
     filling_all,
     filling_currency,
     filling_unit,
+    filling_rates_vat
 ]

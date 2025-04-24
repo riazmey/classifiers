@@ -3,6 +3,15 @@ from django.db import models
 
 class Currency(models.Model):
     
+    class Meta:
+        indexes = [
+            models.Index(fields=['code_dec']),
+            models.Index(fields=['code_str'])
+        ]
+        ordering = ['code_str']
+        verbose_name = 'Валюта'
+        verbose_name_plural = 'Валюты'
+
     code_dec = models.CharField(
         max_length=3,
         default='',
@@ -42,11 +51,3 @@ class Currency(models.Model):
     def __repr__(self):
         return self.repr
 
-    class Meta:
-        indexes = [
-            models.Index(fields=['code_dec']),
-            models.Index(fields=['code_str'])
-        ]
-        ordering = ['code_str']
-        verbose_name = 'Валюта'
-        verbose_name_plural = 'Валюты'

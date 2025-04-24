@@ -1,0 +1,8 @@
+[
+	{"code_str": "without_vat", "rate": 0, "repr": "Без НДС"},
+    {"code_str": "with_vat0", "rate": 0, "repr": "НДС 0%"},
+    {"code_str": "with_vat5", "rate": 5, "repr": "НДС 5%"},
+    {"code_str": "with_vat7", "rate": 7, "repr": "НДС 7%"},
+    {"code_str": "with_vat10", "rate": 10, "repr": "НДС 10%"},
+    {"code_str": "with_vat20", "rate": 10, "repr": "НДС 10%"}
+]

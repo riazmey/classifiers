@@ -19,9 +19,11 @@ from django.contrib import admin
 from django.urls import path
 from classifiers.views import CurrencyAPIView
 from classifiers.views import UnitAPIView
+from classifiers.views import RatesVATAPIView
 
 urlpatterns = [
     path("manage/", admin.site.urls),
     path('api/v1/currency/', CurrencyAPIView.as_view()),
     path('api/v1/unit/', UnitAPIView.as_view()),
+    path('api/v1/rate_vat/', RatesVATAPIView.as_view()),
 ]

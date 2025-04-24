@@ -3,6 +3,15 @@ from django.db import models
 
 class Unit(models.Model):
     
+    class Meta:
+        indexes = [
+            models.Index(fields=['code_dec']),
+            models.Index(fields=['notation_national'])
+        ]
+        ordering = ['id']
+        verbose_name = 'Единица измерения'
+        verbose_name_plural = 'Единицы измерений'
+
     code_dec = models.CharField(
         max_length=4,
         default='',
@@ -67,13 +76,3 @@ class Unit(models.Model):
 
     def __repr__(self):
         return self.repr
-
-    class Meta:
-        indexes = [
-            models.Index(fields=['code_dec']),
-            models.Index(fields=['notation_national'])
-        ]
-        ordering = ['id']
-        verbose_name = 'Единица измерения'
-        verbose_name_plural = 'Единицы измерений'
-

@@ -5,6 +5,8 @@ from .currency import CurrencyGetByCodeStrSerializerParams
 from .unit import UnitSerializerData
 from .unit import UnitGetByCodeDecSerializerParams
 from .unit import UnitGetByNotationNationalSerializerParams
+from .rates_vat import RatesVATSerializerData
+from .rates_vat import RatesVATGetByCodeStrSerializerParams
 
 __all__ = [
     CurrencySerializerData,
@@ -13,4 +15,6 @@ __all__ = [
     UnitSerializerData,
     UnitGetByCodeDecSerializerParams,
     UnitGetByNotationNationalSerializerParams,
+    RatesVATSerializerData,
+    RatesVATGetByCodeStrSerializerParams,
 ]
