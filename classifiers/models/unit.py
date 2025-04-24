@@ -41,13 +41,13 @@ class Unit(models.Model):
         max_length=30,
         default='',
         blank=True,
-        verbose_name='Код бквенный (национальный)'
+        verbose_name='Код буквенный (национальный)'
     )
     code_international = models.CharField(
         max_length=30,
         default='',
         blank=True,
-        verbose_name='Код бквенный (международный)'
+        verbose_name='Код буквенный (международный)'
     )
     repr = models.CharField(
         max_length=256,
