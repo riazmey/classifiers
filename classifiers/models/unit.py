@@ -56,6 +56,12 @@ class Unit(models.Model):
         verbose_name='Единица измерения'
     )
 
+    def __str__(self):
+        return self.repr
+
+    def __repr__(self):
+        return self.repr
+
     def save(self, *args, **kwargs):
         if self.notation_national:
             new_repr = f'{self.name} ({self.notation_national})'
@@ -70,9 +76,3 @@ class Unit(models.Model):
         if self.repr != new_repr:
             self.repr = new_repr
         super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.repr
-
-    def __repr__(self):
-        return self.repr

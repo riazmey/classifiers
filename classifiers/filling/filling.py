@@ -6,13 +6,13 @@ from django.db import transaction
 from django.conf import settings
 from classifiers.models import Currency
 from classifiers.models import Unit
-from classifiers.models import RatesVAT
+from classifiers.models import RateVAT
+from classifiers.models import CargoHazard
 
 
 @transaction.atomic
 def filling_currency():
-    if settings.DEBUG == True:
-        print('Filling currency data:')
+    print('Filling currency data:')
     path_file = f'{os.getcwd()}/classifiers/filling/currency.json'
     with open(path_file, 'r') as file:
         json_data = json.load(file)
@@ -26,18 +26,15 @@ def filling_currency():
                 'name': item_data.get('name', '')
             }
             data_object, created = Currency.objects.update_or_create(code_dec=code_dec, defaults=defaults)
-            if settings.DEBUG == True:
-                if created == True:
-                    print(f' Created currency: {data_object.repr}')
-                else:
-                    print(f' Update currency: {data_object.repr}')
-        if settings.DEBUG == True:
-            print('')
+            if created == True:
+                print(f' Created currency: {data_object.repr}')
+            else:
+                print(f' Update currency: {data_object.repr}')
+        print('')
 
 @transaction.atomic
 def filling_unit():
-    if settings.DEBUG == True:
-        print('Filling units of measurement:')
+    print('Filling units of measurement:')
     path_file = f'{os.getcwd()}/classifiers/filling/unit.json'
     with open(path_file, 'r') as file:
         json_data = json.load(file)
@@ -55,18 +52,15 @@ def filling_unit():
                 'repr': item_data.get('repr', ''),
             }
             data_object, created = Unit.objects.update_or_create(code_dec=code_dec, defaults=defaults)
-            if settings.DEBUG == True:
-                if created == True:
-                    print(f' Created unit: {data_object.repr}')
-                else:
-                    print(f' Update unit: {data_object.repr}')
-        if settings.DEBUG == True:
-            print('')
+            if created == True:
+                print(f' Created unit: {data_object.repr}')
+            else:
+                print(f' Update unit: {data_object.repr}')
+        print('')
 
 @transaction.atomic
 def filling_rates_vat():
-    if settings.DEBUG == True:
-        print('Filling VAT rates data:')
+    print('Filling VAT rates data:')
     path_file = f'{os.getcwd()}/classifiers/filling/rates_vat.json'
     with open(path_file, 'r') as file:
         json_data = json.load(file)
@@ -79,16 +73,36 @@ def filling_rates_vat():
                 'rate': item_data.get('rate', 0),
                 'repr': item_data.get('repr', '')
             }
-            data_object, created = RatesVAT.objects.update_or_create(code_str=code_str, defaults=defaults)
-            if settings.DEBUG == True:
-                if created == True:
-                    print(f' Created VAT rate: {data_object.repr}')
-                else:
-                    print(f' Update VAT rate: {data_object.repr}')
-        if settings.DEBUG == True:
-            print('')
+            data_object, created = RateVAT.objects.update_or_create(code_str=code_str, defaults=defaults)
+            if created == True:
+                print(f' Created VAT rate: {data_object.repr}')
+            else:
+                print(f' Update VAT rate: {data_object.repr}')
+        print('')
+
+@transaction.atomic
+def filling_cargo_hazard():
+    print('Filling cargo hazards data:')
+    path_file = f'{os.getcwd()}/classifiers/filling/cargo_hazard.json'
+    with open(path_file, 'r') as file:
+        json_data = json.load(file)
+        for item_data in json_data:
+            code_str = item_data.get('code_str', '')
+            comment = item_data.get('_comment', '')
+            if comment:
+                continue
+            defaults = {
+                'name': item_data.get('name', '')
+            }
+            data_object, created = CargoHazard.objects.update_or_create(code_str=code_str, defaults=defaults)
+            if created == True:
+                print(f' Created cargo hazard: {data_object.repr}')
+            else:
+                print(f' Update cargo hazard: {data_object.repr}')
+        print('')
 
 def filling_all():
     filling_currency()
     filling_unit()
     filling_rates_vat()
+    filling_cargo_hazard()

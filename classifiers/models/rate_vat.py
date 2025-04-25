@@ -1,7 +1,7 @@
 
 from django.db import models
 
-class RatesVAT(models.Model):
+class RateVAT(models.Model):
 
     class Meta:
         indexes = [
