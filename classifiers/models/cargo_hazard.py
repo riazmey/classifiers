@@ -16,7 +16,7 @@ class CargoHazard(models.Model):
         default='',
         blank=False,
         unique=True,
-        verbose_name='Код'
+        verbose_name='Код (строковый)'
     )
 
     name = models.CharField(

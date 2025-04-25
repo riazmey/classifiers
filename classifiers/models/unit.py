@@ -1,12 +1,19 @@
 
 from django.db import models
+from .enum_unit_type import EnumUnitType
+from .enum_unit_area_using import EnumUnitAreaUsing
+
 
 class Unit(models.Model):
     
     class Meta:
         indexes = [
             models.Index(fields=['code_dec']),
-            models.Index(fields=['notation_national'])
+            models.Index(fields=['type']),
+            models.Index(fields=['area_using']),
+            models.Index(fields=['type', 'area_using']),
+            models.Index(fields=['notation_national']),
+            models.Index(fields=['notation_international']),
         ]
         ordering = ['id']
         verbose_name = 'Единица измерения'
@@ -19,36 +26,56 @@ class Unit(models.Model):
         unique=True,
         verbose_name='Код числовой'
     )
+
     name = models.CharField(
         max_length=100,
         default='',
         blank=False,
         verbose_name='Наименование'
     )
+
+    type = models.ForeignKey(
+        EnumUnitType,
+        on_delete=models.PROTECT,
+        blank=False,
+        verbose_name='Тип измерения'
+    )
+
+    area_using = models.ForeignKey(
+        EnumUnitAreaUsing,
+        on_delete=models.PROTECT,
+        blank=False,
+        verbose_name='Регион использования'
+    )
+
     notation_national = models.CharField(
         max_length=30,
         default='',
         blank=True,
         verbose_name='Условное обозначение (национальное)'
     )
+
     notation_international = models.CharField(
         max_length=30,
         default='',
         blank=True,
         verbose_name='Условное обозначение (международное)'
     )
+
     code_national = models.CharField(
         max_length=30,
         default='',
         blank=True,
         verbose_name='Код буквенный (национальный)'
     )
+
     code_international = models.CharField(
         max_length=30,
         default='',
         blank=True,
         verbose_name='Код буквенный (международный)'
     )
+
     repr = models.CharField(
         max_length=256,
         default='',

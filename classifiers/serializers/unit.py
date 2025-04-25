@@ -17,9 +17,18 @@ def UnitValidateNotationNational(notation_national: str):
         message = f'Couldn\'t find a unit of measurement with notation_national equal to \'{notation_national}\''
         raise serializers.ValidationError(message)
 
+def UnitValidateNotationInternational(notation_international: str):
+    try:
+        return Unit.objects.get(notation_international=notation_international)
+    except Unit.DoesNotExist:
+        message = f'Couldn\'t find a unit of measurement with notation_international equal to \'{notation_international}\''
+        raise serializers.ValidationError(message)
+
 class UnitSerializerData(serializers.ModelSerializer):
     code_dec = serializers.CharField()
     name = serializers.CharField()
+    type = serializers.CharField()
+    area_using = serializers.CharField()
     notation_national = serializers.CharField()
     notation_international = serializers.CharField()
     code_national = serializers.CharField()
@@ -31,6 +40,8 @@ class UnitSerializerData(serializers.ModelSerializer):
         fields = (
             'code_dec',
             'name',
+            'type',
+            'area_using',
             'notation_national',
             'notation_international',
             'code_national',
@@ -42,3 +53,6 @@ class UnitGetByCodeDecSerializerParams(serializers.Serializer):
 
 class UnitGetByNotationNationalSerializerParams(serializers.Serializer):
     notation_national = serializers.CharField(validators=[UnitValidateNotationNational])
+
+class UnitGetByNotationInternationalSerializerParams(serializers.Serializer):
+    notation_international = serializers.CharField(validators=[UnitValidateNotationInternational])

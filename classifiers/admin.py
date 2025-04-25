@@ -12,10 +12,10 @@ class CurrencyAdmin(admin.ModelAdmin):
     ordering = ['name']
 
 class UnitAdmin(admin.ModelAdmin):
-    fields = [('name', 'code_dec'), ('notation_national', 'notation_international'), ('code_national', 'code_international')]
-    list_display = ['code_dec', 'name', 'notation_national', 'notation_international', 'code_national', 'code_international']
+    fields = [('name', 'code_dec'), ('type', 'area_using'), ('notation_national', 'notation_international'), ('code_national', 'code_international')]
+    list_display = ['code_dec', 'name', 'type', 'area_using', 'notation_national', 'notation_international', 'code_national', 'code_international']
     search_fields = ['code_dec', 'notation_national', 'code_national', 'name']
-    ordering = ['id']
+    ordering = ['area_using', 'type', 'code_dec']
 
 class RateVATAdmin(admin.ModelAdmin):
     fields = ['repr', 'code_str', 'rate']

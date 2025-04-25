@@ -5,6 +5,7 @@ from .currency import CurrencyGetByCodeStrSerializerParams
 from .unit import UnitSerializerData
 from .unit import UnitGetByCodeDecSerializerParams
 from .unit import UnitGetByNotationNationalSerializerParams
+from .unit import UnitGetByNotationInternationalSerializerParams
 from .rate_vat import RateVATSerializerData
 from .rate_vat import RateVATGetByCodeStrSerializerParams
 from .cargo_hazard import CargoHazardSerializerData
@@ -17,6 +18,7 @@ __all__ = [
     UnitSerializerData,
     UnitGetByCodeDecSerializerParams,
     UnitGetByNotationNationalSerializerParams,
+    UnitGetByNotationInternationalSerializerParams,
     RateVATSerializerData,
     RateVATGetByCodeStrSerializerParams,
     CargoHazardSerializerData,

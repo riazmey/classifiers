@@ -17,14 +17,14 @@ class Currency(models.Model):
         default='',
         blank=False,
         unique=True,
-        verbose_name='Код числовой'
+        verbose_name='Код (числовой)'
     )
     code_str = models.CharField(
         max_length=3,
         default='',
         blank=False,
         unique=True,
-        verbose_name='Код строковый'
+        verbose_name='Код (строковый)'
     )
     name = models.CharField(
         max_length=50,

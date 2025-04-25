@@ -1,0 +1,10 @@
+[
+    {"code_str": "weight", "repr": "Измерение массы"},
+    {"code_str": "volume", "repr": "Измерение объема"},
+    {"code_str": "length", "repr": "Измерение длины"},
+    {"code_str": "area", "repr": "Измерение площади"},
+    {"code_str": "time", "repr": "Измерение времени"},
+    {"code_str": "technical", "repr": "Технические измерения"},
+    {"code_str": "economic", "repr": "Экономические измерения"}
+]
+

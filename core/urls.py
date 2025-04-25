@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path
 from classifiers.views import CurrencyAPIView
 from classifiers.views import UnitAPIView
+from classifiers.views import UnitsAPIView
 from classifiers.views import RateVATAPIView
 from classifiers.views import CargoHazardAPIView
 
@@ -26,6 +27,7 @@ urlpatterns = [
     path("manage/", admin.site.urls),
     path('api/v1/currency/', CurrencyAPIView.as_view()),
     path('api/v1/unit/', UnitAPIView.as_view()),
+    path('api/v1/units/', UnitsAPIView.as_view()),
     path('api/v1/rate_vat/', RateVATAPIView.as_view()),
     path('api/v1/cargo_hazard/', CargoHazardAPIView.as_view()),
 ]
