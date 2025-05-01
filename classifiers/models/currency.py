@@ -1,5 +1,8 @@
 
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import pre_save
+
 
 class Currency(models.Model):
     
@@ -13,31 +16,30 @@ class Currency(models.Model):
         verbose_name_plural = 'Валюты'
 
     code_dec = models.CharField(
-        max_length=3,
-        default='',
-        blank=False,
-        unique=True,
-        verbose_name='Код (числовой)'
-    )
+        max_length = 3,
+        default = '',
+        blank = False,
+        unique = True,
+        verbose_name = 'Код (числовой)')
+    
     code_str = models.CharField(
-        max_length=3,
-        default='',
-        blank=False,
-        unique=True,
-        verbose_name='Код (строковый)'
-    )
+        max_length = 3,
+        default = '',
+        blank = False,
+        unique = True,
+        verbose_name = 'Код (строковый)')
+    
     name = models.CharField(
-        max_length=50,
-        default='',
-        blank=False,
-        verbose_name='Имя'
-    )
+        max_length = 50,
+        default = '',
+        blank = False,
+        verbose_name = 'Имя')
+    
     repr = models.CharField(
-        max_length=256,
-        default='',
-        blank=True,
-        verbose_name='Валюта'
-    )
+        max_length = 256,
+        default = '',
+        blank = True,
+        verbose_name = 'Валюта')
 
     def __str__(self):
         return self.repr
@@ -45,8 +47,8 @@ class Currency(models.Model):
     def __repr__(self):
         return self.repr
 
-    def save(self, *args, **kwargs):
-        new_repr = f'{self.code_str} ({self.name})'
-        if self.repr != new_repr:
-            self.repr = new_repr
-        super().save(*args, **kwargs)
+@receiver(pre_save, sender=Currency)
+def update_repr(sender, instance: Currency, **kwargs):
+    new_repr = f'{instance.code_str} ({instance.name})'
+    if instance.repr != new_repr:
+        instance.repr = new_repr

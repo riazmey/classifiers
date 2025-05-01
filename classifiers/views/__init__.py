@@ -10,5 +10,4 @@ __all__ = [
     UnitAPIView,
     UnitsAPIView,
     RateVATAPIView,
-    CargoHazardAPIView,
-]
+    CargoHazardAPIView]

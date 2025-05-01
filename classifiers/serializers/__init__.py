@@ -22,5 +22,4 @@ __all__ = [
     RateVATSerializerData,
     RateVATGetByCodeStrSerializerParams,
     CargoHazardSerializerData,
-    CargoHazardGetByCodeStrSerializerParams,
-]
+    CargoHazardGetByCodeStrSerializerParams]

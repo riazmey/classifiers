@@ -12,5 +12,4 @@ __all__ = [
     Currency,
     Unit,
     RateVAT,
-    CargoHazard,
-]
+    CargoHazard]
