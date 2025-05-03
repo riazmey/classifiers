@@ -22,6 +22,7 @@ from classifiers.views import UnitAPIView
 from classifiers.views import UnitsAPIView
 from classifiers.views import RateVATAPIView
 from classifiers.views import CargoHazardAPIView
+from classifiers.views import CargosHazardsAPIView
 
 urlpatterns = [
     path("manage/", admin.site.urls),
@@ -30,4 +31,5 @@ urlpatterns = [
     path('api/v1/units/', UnitsAPIView.as_view()),
     path('api/v1/rate_vat/', RateVATAPIView.as_view()),
     path('api/v1/cargo_hazard/', CargoHazardAPIView.as_view()),
+    path('api/v1/cargos_hazards/', CargosHazardsAPIView.as_view()),
 ]

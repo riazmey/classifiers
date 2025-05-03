@@ -1,6 +1,7 @@
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import serializers
 from classifiers.serializers import CargoHazardSerializerData
 from classifiers.serializers import CargoHazardGetByCodeStrSerializerParams
 from classifiers.models import CargoHazard
@@ -19,3 +20,15 @@ class CargoHazardAPIView(APIView):
             data = queryset[0]
 
         return Response(CargoHazardSerializerData(data).data)
+
+class CargosHazardsAPIView(APIView):
+
+    def get(self, request):
+        
+        queryset = CargoHazard.objects.all()
+
+        if queryset:
+            return Response(CargoHazardSerializerData(queryset, many=True).data)
+        else:
+            message = 'Couldn\'t find a cargos hazards'
+            raise serializers.ValidationError(message)
