@@ -23,6 +23,7 @@ from classifiers.views import (
     UnitAPIView,
     UnitsAPIView,
     RateVATAPIView,
+    RatesVATAPIView,
     CargoHazardAPIView,
     CargosHazardsAPIView)
 
@@ -34,6 +35,7 @@ urlpatterns = [
     path('api/v1/unit/', UnitAPIView.as_view()),
     path('api/v1/units/', UnitsAPIView.as_view()),
     path('api/v1/rate_vat/', RateVATAPIView.as_view()),
+    path('api/v1/rates_vat/', RatesVATAPIView.as_view()),
     path('api/v1/cargo_hazard/', CargoHazardAPIView.as_view()),
     path('api/v1/cargos_hazards/', CargosHazardsAPIView.as_view()),
 ]

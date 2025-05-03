@@ -1,9 +1,23 @@
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import serializers
 from classifiers.serializers import RateVATSerializerData
 from classifiers.serializers import RateVATGetByCodeStrSerializerParams
 from classifiers.models import RateVAT
+
+
+class RatesVATAPIView(APIView):
+
+    def get(self, request):
+        
+        queryset = RateVAT.objects.all()
+
+        if queryset:
+            return Response(RateVATSerializerData(queryset, many=True).data)
+        else:
+            message = 'Couldn\'t find a rates VAT'
+            raise serializers.ValidationError(message)
 
 class RateVATAPIView(APIView):
 

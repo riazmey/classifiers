@@ -4,6 +4,7 @@ from .currency import CurrencyAPIView
 from .unit import UnitAPIView
 from .unit import UnitsAPIView
 from .rate_vat import RateVATAPIView
+from .rate_vat import RatesVATAPIView
 from .cargo_hazard import CargoHazardAPIView
 from .cargo_hazard import CargosHazardsAPIView
 
@@ -13,5 +14,6 @@ __all__ = [
     UnitAPIView,
     UnitsAPIView,
     RateVATAPIView,
+    RatesVATAPIView,
     CargoHazardAPIView,
     CargosHazardsAPIView]
