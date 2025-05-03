@@ -1,4 +1,5 @@
 
+from .currency import СurrenciesAPIView
 from .currency import CurrencyAPIView
 from .unit import UnitAPIView
 from .unit import UnitsAPIView
@@ -7,6 +8,7 @@ from .cargo_hazard import CargoHazardAPIView
 from .cargo_hazard import CargosHazardsAPIView
 
 __all__ = [
+    СurrenciesAPIView,
     CurrencyAPIView,
     UnitAPIView,
     UnitsAPIView,

@@ -17,15 +17,19 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from classifiers.views import CurrencyAPIView
-from classifiers.views import UnitAPIView
-from classifiers.views import UnitsAPIView
-from classifiers.views import RateVATAPIView
-from classifiers.views import CargoHazardAPIView
-from classifiers.views import CargosHazardsAPIView
+from classifiers.views import (
+    СurrenciesAPIView,
+    CurrencyAPIView,
+    UnitAPIView,
+    UnitsAPIView,
+    RateVATAPIView,
+    CargoHazardAPIView,
+    CargosHazardsAPIView)
+
 
 urlpatterns = [
     path("manage/", admin.site.urls),
+    path('api/v1/currencies/', СurrenciesAPIView.as_view()),
     path('api/v1/currency/', CurrencyAPIView.as_view()),
     path('api/v1/unit/', UnitAPIView.as_view()),
     path('api/v1/units/', UnitsAPIView.as_view()),

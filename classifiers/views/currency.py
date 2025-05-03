@@ -1,10 +1,23 @@
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import serializers
 from classifiers.serializers import CurrencySerializerData
 from classifiers.serializers import CurrencyGetByCodeDecSerializerParams
 from classifiers.serializers import CurrencyGetByCodeStrSerializerParams
 from classifiers.models import Currency
+
+class СurrenciesAPIView(APIView):
+
+    def get(self, request):
+        
+        queryset = Currency.objects.all()
+
+        if queryset:
+            return Response(CurrencySerializerData(queryset, many=True).data)
+        else:
+            message = 'Couldn\'t find a currencies'
+            raise serializers.ValidationError(message)
 
 class CurrencyAPIView(APIView):
 
