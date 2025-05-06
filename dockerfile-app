@@ -22,6 +22,7 @@ RUN echo "Europe/Moscow" > /etc/timezone
 
 # Upgrade python-pip
 RUN pip install --upgrade pip
+RUN pip install gunicorn
 
 WORKDIR /app
 RUN git clone --branch main https://github.com/riazmey/classifiers.git
