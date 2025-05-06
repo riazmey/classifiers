@@ -2,24 +2,33 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import serializers
-from classifiers.serializers import UnitSerializerData
-from classifiers.serializers import UnitGetByCodeDecSerializerParams
-from classifiers.serializers import UnitGetByNotationNationalSerializerParams
-from classifiers.serializers import UnitGetByNotationInternationalSerializerParams
-from classifiers.models import Unit
-from classifiers.models import EnumUnitType
-from classifiers.models import EnumUnitAreaUsing
+
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie, vary_on_headers
+
+from classifiers.serializers import (
+    UnitSerializerData,
+    UnitGetByCodeDecSerializerParams,
+    UnitGetByNotationNationalSerializerParams,
+    UnitGetByNotationInternationalSerializerParams)
+
+from classifiers.models import (
+    Unit,
+    EnumUnitType,
+    EnumUnitAreaUsing)
 
 
 class UnitAPIView(APIView):
 
+    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(vary_on_cookie)
     def get(self, request):
 
         available_fields = [
             'code_dec',
             'notation_national',
-            'notation_international',
-        ]
+            'notation_international']
 
         if len(request.query_params) == 0:
             message = f'The selection parameters were not passed to the request. ' \
@@ -54,6 +63,8 @@ class UnitAPIView(APIView):
 
 class UnitsAPIView(APIView):
 
+    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(vary_on_cookie)
     def get(self, request):
 
         available_fields = [
