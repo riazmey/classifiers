@@ -28,7 +28,8 @@ services:
         type: bind
         bind:
           create_host_path: true
-    command: python /app/classifiers/manage.py runserver 0.0.0.0:${WEB_PORT}
+    #command: python /app/classifiers/manage.py runserver 0.0.0.0:${WEB_PORT}
+    entrypoint: /app/classifiers/entrypoint-app.sh
     healthcheck:
       test: [ 'CMD-SHELL', 'curl --fail http://docker.ltlog.local:${WEB_PORT}/manage || exit 1' ]
       interval: 10s
