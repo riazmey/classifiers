@@ -54,7 +54,6 @@ class UnitAPIView(APIView):
             queryset = Unit.objects.filter(notation_national=notation_national)
         elif notation_international:
             queryset = Unit.objects.filter(notation_international=notation_international)
-
         if queryset:
             data = queryset[0]
         
