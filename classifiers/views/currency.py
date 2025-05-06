@@ -2,13 +2,21 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import serializers
+
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
+
 from classifiers.serializers import CurrencySerializerData
 from classifiers.serializers import CurrencyGetByCodeDecSerializerParams
 from classifiers.serializers import CurrencyGetByCodeStrSerializerParams
 from classifiers.models import Currency
 
+
 class СurrenciesAPIView(APIView):
 
+    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(vary_on_cookie)
     def get(self, request):
         
         queryset = Currency.objects.all()
@@ -21,6 +29,8 @@ class СurrenciesAPIView(APIView):
 
 class CurrencyAPIView(APIView):
 
+    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(vary_on_cookie)
     def get(self, request):
 
         code_dec = request.query_params.get('code_dec', '')
