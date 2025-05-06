@@ -62,9 +62,9 @@ if DATABASE_DB:
     }
 else:
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
@@ -80,14 +80,15 @@ CACHES = {
 
 # Application definition
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "classifiers.apps.ClassifiersConfig",
-    "rest_framework",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'cachedapplication',
+    'classifiers.apps.ClassifiersConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -168,4 +169,11 @@ REST_FRAMEWORK = {
         'rest_framework.renders.JSONRenderer',
         'rest_framework.renders.BrowsableAPIRenderer',
     ]
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache',
+    }
 }
