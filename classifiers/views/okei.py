@@ -35,11 +35,9 @@ class APIViewOKEI(APIView):
             'notation_international']
 
         query_params = {**request.query_params}
-        print(f' !!!!!!!!! query_params !!!!!!!!! = {query_params}')
 
         if query_params:
             for key, value in query_params.items():
-                print(f' !!!!!!!!! key = {key}; value = {value} !!!!!!!!!')
                 serializer_params = None
                 value = query_params[key][0]
                 if not key in available_fields:
