@@ -4,6 +4,8 @@ from .enum_unit_area_using import SerializerEnumUnitAreaUsingCodeStr
 
 from .unit import (
     SerializerUnit,
+    SerializerUnitType,
+    SerializerUnitAreaUsing,
     SerializerUnitCodeDec,
     SerializerUnitNotationNational,
     SerializerUnitNotationInternational)
@@ -30,6 +32,8 @@ __all__ = [
     SerializerEnumUnitTypeCodeStr,
     SerializerEnumUnitAreaUsingCodeStr,
     SerializerUnit,
+    SerializerUnitType,
+    SerializerUnitAreaUsing,
     SerializerUnitCodeDec,
     SerializerUnitNotationNational,
     SerializerUnitNotationInternational,

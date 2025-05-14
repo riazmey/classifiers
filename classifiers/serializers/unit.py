@@ -3,6 +3,8 @@ from rest_framework import serializers
 from classifiers.models import Unit
 
 from classifiers.validators import (
+    validate_enum_unit_type_code_str,
+    validate_enum_unit_area_using_code_str,
     validate_unit_code_dec,
     validate_unit_notation_national,
     validate_unit_notation_international)
@@ -31,6 +33,13 @@ class SerializerUnit(serializers.ModelSerializer):
             'code_national',
             'code_international',
             'repr')
+
+class SerializerUnitType(serializers.Serializer):
+    type = serializers.CharField(validators=[validate_enum_unit_type_code_str])
+
+
+class SerializerUnitAreaUsing(serializers.Serializer):
+    area_using = serializers.CharField(validators=[validate_enum_unit_area_using_code_str])
 
 
 class SerializerUnitCodeDec(serializers.Serializer):

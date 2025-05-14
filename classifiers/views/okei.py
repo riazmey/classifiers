@@ -7,12 +7,15 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
-from classifiers.models import Unit
+from classifiers.models import (
+    Unit,
+    EnumUnitType,
+    EnumUnitAreaUsing)
 
 from classifiers.serializers import (
-    SerializerEnumUnitTypeCodeStr,
-    SerializerEnumUnitAreaUsingCodeStr,
     SerializerUnit,
+    SerializerUnitType,
+    SerializerUnitAreaUsing,
     SerializerUnitCodeDec,
     SerializerUnitNotationNational,
     SerializerUnitNotationInternational)
@@ -32,18 +35,24 @@ class APIViewOKEI(APIView):
             'notation_international']
 
         query_params = {**request.query_params}
+        print(f' !!!!!!!!! query_params !!!!!!!!! = {query_params}')
 
         if query_params:
             for key, value in query_params.items():
+                print(f' !!!!!!!!! key = {key}; value = {value} !!!!!!!!!')
                 serializer_params = None
                 value = query_params[key][0]
                 if not key in available_fields:
                     message = f'Unknown parameter "{key}".'
                     raise serializers.ValidationError(message)
                 elif key == 'type':
-                    serializer_params = SerializerEnumUnitTypeCodeStr(data=request.query_params)
+                    serializer_params = SerializerUnitType(data=request.query_params)
+                    if serializer_params.is_valid(raise_exception=True):
+                        value = EnumUnitType.objects.get(code_str=value)
                 elif key == 'area_using':
-                    serializer_params = SerializerEnumUnitAreaUsingCodeStr(data=request.query_params)
+                    serializer_params = SerializerUnitAreaUsing(data=request.query_params)
+                    if serializer_params.is_valid(raise_exception=True):
+                        value = EnumUnitAreaUsing.objects.get(code_str=value)
                 elif key == 'code_dec':
                     serializer_params = SerializerUnitCodeDec(data=request.query_params)
                 elif key == 'notation_national':
