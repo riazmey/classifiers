@@ -1,9 +1,13 @@
 
 from django.contrib import admin
-from classifiers.models import Currency
-from classifiers.models import Unit
-from classifiers.models import RateVAT
-from classifiers.models import CargoHazard
+
+from classifiers.models import (
+    Currency,
+    Unit,
+    RateVAT,
+    CargoHazard,
+    LegalType)
+
 
 class CurrencyAdmin(admin.ModelAdmin):
     
@@ -72,8 +76,24 @@ class RateVATAdmin(admin.ModelAdmin):
 class CargoHazardAdmin(admin.ModelAdmin):
     
     fields = [
-        'name',
-        'code_str']
+        'code_str',
+        'name']
+    
+    list_display = [
+        'code_str',
+        'name']
+    
+    search_fields = [
+        'code_str',
+        'name']
+    
+    ordering = ['code_str']
+
+class LegalTypeAdmin(admin.ModelAdmin):
+    
+    fields = [
+        'code_str',
+        'name']
     
     list_display = [
         'code_str',
@@ -90,3 +110,4 @@ admin.site.register(Currency, CurrencyAdmin)
 admin.site.register(Unit, UnitAdmin)
 admin.site.register(RateVAT, RateVATAdmin)
 admin.site.register(CargoHazard, CargoHazardAdmin)
+admin.site.register(LegalType, LegalTypeAdmin)

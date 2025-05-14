@@ -18,24 +18,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from classifiers.views import (
-    СurrenciesAPIView,
-    CurrencyAPIView,
-    UnitAPIView,
-    UnitsAPIView,
-    RateVATAPIView,
-    RatesVATAPIView,
-    CargoHazardAPIView,
-    CargosHazardsAPIView)
+    APIViewOKV,
+    APIViewOKEI,
+    APIViewOKOPF,
+    APIViewRateVAT,
+    APIViewCargoHazard)
 
 
 urlpatterns = [
     path("manage/", admin.site.urls),
-    path('api/v1/currencies/', СurrenciesAPIView.as_view()),
-    path('api/v1/currency/', CurrencyAPIView.as_view()),
-    path('api/v1/unit/', UnitAPIView.as_view()),
-    path('api/v1/units/', UnitsAPIView.as_view()),
-    path('api/v1/rate_vat/', RateVATAPIView.as_view()),
-    path('api/v1/rates_vat/', RatesVATAPIView.as_view()),
-    path('api/v1/cargo_hazard/', CargoHazardAPIView.as_view()),
-    path('api/v1/cargos_hazards/', CargosHazardsAPIView.as_view()),
+    path('api/v1/okv/', APIViewOKV.as_view()),
+    path('api/v1/okei/', APIViewOKEI.as_view()),
+    path('api/v1/okopf/', APIViewOKOPF.as_view()),
+    path('api/v1/rate_vat/', APIViewRateVAT.as_view()),
+    path('api/v1/cargo_hazard/', APIViewCargoHazard.as_view()),
 ]

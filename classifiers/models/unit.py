@@ -21,7 +21,7 @@ class Unit(models.Model):
         
         ordering = ['id']
         verbose_name = 'Единица измерения'
-        verbose_name_plural = 'Единицы измерений'
+        verbose_name_plural = 'Общероссийский классификатор единиц измерения (ОКЕИ)'
 
     code_dec = models.CharField(
         max_length = 4,
