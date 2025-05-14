@@ -2,22 +2,12 @@
 from rest_framework import serializers  
 from classifiers.models import Currency
 
+from classifiers.validators import (
+    validate_currency_code_dec,
+    validate_currency_code_str)
 
-def CurrencyValidateCodeDec(code_dec: str):
-    try:
-        return Currency.objects.get(code_dec=code_dec)
-    except Currency.DoesNotExist:
-        message = f'Couldn\'t find a currency with code_dec equal to \'{code_dec}\''
-        raise serializers.ValidationError(message)
 
-def CurrencyValidateCodeStr(code_str: str):
-    try:
-        return Currency.objects.get(code_str=code_str)
-    except Currency.DoesNotExist:
-        message = f'Couldn\'t find a currency with code_str equal to \'{code_str}\''
-        raise serializers.ValidationError(message)
-
-class CurrencySerializerData(serializers.ModelSerializer):
+class SerializerCurrency(serializers.ModelSerializer):
     code_dec = serializers.CharField()
     code_str = serializers.CharField()
     name = serializers.CharField()
@@ -31,8 +21,10 @@ class CurrencySerializerData(serializers.ModelSerializer):
             'name',
             'repr')
 
-class CurrencyGetByCodeDecSerializerParams(serializers.Serializer):
-    code_dec = serializers.CharField(validators=[CurrencyValidateCodeDec])
 
-class CurrencyGetByCodeStrSerializerParams(serializers.Serializer):
-    code_str = serializers.CharField(validators=[CurrencyValidateCodeStr])
+class SerializerCurrencyCodeDec(serializers.Serializer):
+    code_dec = serializers.CharField(validators=[validate_currency_code_dec])
+
+
+class SerializerCurrencyCodeStr(serializers.Serializer):
+    code_str = serializers.CharField(validators=[validate_currency_code_str])

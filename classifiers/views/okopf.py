@@ -7,14 +7,14 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
-from classifiers.models import CargoHazard
+from classifiers.models import LegalType
 
 from classifiers.serializers import (
-    SerializerCargoHazard,
-    SerializerCargoHazardCodeStr)
+    SerializerLegalType,
+    SerializerLegalTypeCodeStr)
 
 
-class APIViewCargoHazard(APIView):
+class APIViewOKOPF(APIView):
 
     @method_decorator(cache_page(60 * 60 * 2))
     @method_decorator(vary_on_cookie)
@@ -31,18 +31,18 @@ class APIViewCargoHazard(APIView):
                     message = f'Unknown parameter "{key}".'
                     raise serializers.ValidationError(message)
                 elif key == 'code_str':
-                    serializer_params = SerializerCargoHazardCodeStr(data=request.query_params)
+                    serializer_params = SerializerLegalTypeCodeStr(data=request.query_params)
                 query_params[key] = value
                 if serializer_params:
                     serializer_params.is_valid(raise_exception=True)
 
-        queryset = CargoHazard.objects.filter(**query_params)
+        queryset = LegalType.objects.filter(**query_params)
 
         if queryset:
             if len(queryset) == 1:
-                return Response(SerializerCargoHazard(queryset[0]).data)
+                return Response(SerializerLegalType(queryset[0]).data)
             else:
-                return Response(SerializerCargoHazard(queryset, many=True).data)
+                return Response(SerializerLegalType(queryset, many=True).data)
         else:
-            message = 'Couldn\'t find a cargos hazards'
+            message = 'Couldn\'t find a legal types'
             raise serializers.ValidationError(message)

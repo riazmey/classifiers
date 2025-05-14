@@ -1,16 +1,10 @@
 
 from rest_framework import serializers  
 from classifiers.models import CargoHazard
+from classifiers.validators import validate_cargo_hazard_code_str
 
 
-def CargoHazardValidateCodeStr(code_str: str):
-    try:
-        return CargoHazard.objects.get(code_str=code_str)
-    except CargoHazard.DoesNotExist:
-        message = f'Couldn\'t find a class cargo hazard with code_str equal to \'{code_str}\''
-        raise serializers.ValidationError(message)
-
-class CargoHazardSerializerData(serializers.ModelSerializer):
+class SerializerCargoHazard(serializers.ModelSerializer):
     code_str = serializers.CharField()
     name = serializers.CharField()
     repr = serializers.CharField()
@@ -22,5 +16,6 @@ class CargoHazardSerializerData(serializers.ModelSerializer):
             'name',
             'repr')
 
-class CargoHazardGetByCodeStrSerializerParams(serializers.Serializer):
-    code_str = serializers.CharField(validators=[CargoHazardValidateCodeStr])
+
+class SerializerCargoHazardCodeStr(serializers.Serializer):
+    code_str = serializers.CharField(validators=[validate_cargo_hazard_code_str])

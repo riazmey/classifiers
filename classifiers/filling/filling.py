@@ -3,12 +3,15 @@ import os
 import json
 
 from django.db import transaction
-from classifiers.models import EnumUnitAreaUsing
-from classifiers.models import EnumUnitType
-from classifiers.models import Currency
-from classifiers.models import Unit
-from classifiers.models import RateVAT
-from classifiers.models import CargoHazard
+
+from classifiers.models import (
+    EnumUnitAreaUsing,
+    EnumUnitType,
+    Currency,
+    Unit,
+    RateVAT,
+    CargoHazard,
+    LegalType)
 
 
 @transaction.atomic
@@ -148,6 +151,25 @@ def filling_cargo_hazard():
                 print(f' Update cargo hazard: {data_object.repr}')
         print('')
 
+@transaction.atomic
+def filling_legal_type():
+    print('Filling classifier of organizational and legal forms:')
+    path_file = f'{os.getcwd()}/classifiers/filling/legal_type.json'
+    with open(path_file, 'r') as file:
+        json_data = json.load(file)
+        for item_data in json_data:
+            code_str = item_data.get('code_str', '')
+            comment = item_data.get('_comment', '')
+            if comment:
+                continue
+            defaults = {'name': item_data.get('name', '')}
+            data_object, created = LegalType.objects.update_or_create(code_str=code_str, defaults=defaults)
+            if created == True:
+                print(f' Created legal type: {data_object.name}')
+            else:
+                print(f' Update legal type: {data_object.name}')
+        print('')
+
 def filling_all():
     filling_enum_unit_area_using()
     filling_enum_unit_type()
@@ -155,3 +177,4 @@ def filling_all():
     filling_unit()
     filling_rates_vat()
     filling_cargo_hazard()
+    filling_legal_type()
