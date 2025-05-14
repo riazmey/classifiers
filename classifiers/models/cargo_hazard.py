@@ -10,7 +10,7 @@ class CargoHazard(models.Model):
         indexes = [models.Index(fields=['code_str'])]
         ordering = ['code_str']
         verbose_name = 'Класс опасности груза'
-        verbose_name_plural = 'Классы опасности грузов'
+        verbose_name_plural = 'Классификатор опасных грузов. ГОСТ Р 57478—2017'
 
     code_str = models.CharField(
         max_length = 10,

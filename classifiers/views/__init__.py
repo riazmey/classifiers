@@ -1,19 +1,14 @@
 
-from .currency import СurrenciesAPIView
-from .currency import CurrencyAPIView
-from .unit import UnitAPIView
-from .unit import UnitsAPIView
-from .rate_vat import RateVATAPIView
-from .rate_vat import RatesVATAPIView
-from .cargo_hazard import CargoHazardAPIView
-from .cargo_hazard import CargosHazardsAPIView
+from .okv import APIViewOKV
+from .okei import APIViewOKEI
+from .okopf import APIViewOKOPF
+from .rate_vat import APIViewRateVAT
+from .cargo_hazard import APIViewCargoHazard
+
 
 __all__ = [
-    СurrenciesAPIView,
-    CurrencyAPIView,
-    UnitAPIView,
-    UnitsAPIView,
-    RateVATAPIView,
-    RatesVATAPIView,
-    CargoHazardAPIView,
-    CargosHazardsAPIView]
+    APIViewOKV,
+    APIViewOKEI,
+    APIViewOKOPF,
+    APIViewRateVAT,
+    APIViewCargoHazard]

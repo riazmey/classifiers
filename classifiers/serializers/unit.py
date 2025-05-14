@@ -2,29 +2,13 @@
 from rest_framework import serializers  
 from classifiers.models import Unit
 
+from classifiers.validators import (
+    validate_unit_code_dec,
+    validate_unit_notation_national,
+    validate_unit_notation_international)
 
-def UnitValidateCodeDec(code_dec: str):
-    try:
-        return Unit.objects.get(code_dec=code_dec)
-    except Unit.DoesNotExist:
-        message = f'Couldn\'t find a unit of measurement with code_dec equal to \'{code_dec}\''
-        raise serializers.ValidationError(message)
 
-def UnitValidateNotationNational(notation_national: str):
-    try:
-        return Unit.objects.get(notation_national=notation_national)
-    except Unit.DoesNotExist:
-        message = f'Couldn\'t find a unit of measurement with notation_national equal to \'{notation_national}\''
-        raise serializers.ValidationError(message)
-
-def UnitValidateNotationInternational(notation_international: str):
-    try:
-        return Unit.objects.get(notation_international=notation_international)
-    except Unit.DoesNotExist:
-        message = f'Couldn\'t find a unit of measurement with notation_international equal to \'{notation_international}\''
-        raise serializers.ValidationError(message)
-
-class UnitSerializerData(serializers.ModelSerializer):
+class SerializerUnit(serializers.ModelSerializer):
     code_dec = serializers.CharField()
     name = serializers.CharField()
     type = serializers.CharField()
@@ -48,11 +32,14 @@ class UnitSerializerData(serializers.ModelSerializer):
             'code_international',
             'repr')
 
-class UnitGetByCodeDecSerializerParams(serializers.Serializer):
-    code_dec = serializers.CharField(validators=[UnitValidateCodeDec])
 
-class UnitGetByNotationNationalSerializerParams(serializers.Serializer):
-    notation_national = serializers.CharField(validators=[UnitValidateNotationNational])
+class SerializerUnitCodeDec(serializers.Serializer):
+    code_dec = serializers.CharField(validators=[validate_unit_code_dec])
 
-class UnitGetByNotationInternationalSerializerParams(serializers.Serializer):
-    notation_international = serializers.CharField(validators=[UnitValidateNotationInternational])
+
+class SerializerUnitNotationNational(serializers.Serializer):
+    notation_national = serializers.CharField(validators=[validate_unit_notation_national])
+
+
+class SerializerUnitNotationInternational(serializers.Serializer):
+    notation_international = serializers.CharField(validators=[validate_unit_notation_international])

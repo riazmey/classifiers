@@ -13,7 +13,7 @@ class Currency(models.Model):
         ]
         ordering = ['code_str']
         verbose_name = 'Валюта'
-        verbose_name_plural = 'Валюты'
+        verbose_name_plural = 'Общероссийский классификатор валют (ОКВ)'
 
     code_dec = models.CharField(
         max_length = 3,
