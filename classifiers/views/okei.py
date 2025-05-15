@@ -64,10 +64,7 @@ class APIViewOKEI(APIView):
         queryset = Unit.objects.filter(**query_params)
 
         if queryset:
-            if len(queryset) == 1:
-                return Response(SerializerUnit(queryset[0]).data)
-            else:
-                return Response(SerializerUnit(queryset, many=True).data)
+            return Response(SerializerUnit(queryset, many=True).data)
         else:
             if query_params:
                 message = f'Couldn\'t find a units of measurement with params: {query_params}'

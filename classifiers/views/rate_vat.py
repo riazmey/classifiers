@@ -39,10 +39,7 @@ class APIViewRateVAT(APIView):
         queryset = RateVAT.objects.filter(**query_params)
 
         if queryset:
-            if len(queryset) == 1:
-                return Response(SerializerRateVAT(queryset[0]).data)
-            else:
-                return Response(SerializerRateVAT(queryset, many=True).data)
+            return Response(SerializerRateVAT(queryset, many=True).data)
         else:
             message = 'Couldn\'t find a rates vat'
             raise serializers.ValidationError(message)

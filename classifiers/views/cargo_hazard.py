@@ -39,10 +39,7 @@ class APIViewCargoHazard(APIView):
         queryset = CargoHazard.objects.filter(**query_params)
 
         if queryset:
-            if len(queryset) == 1:
-                return Response(SerializerCargoHazard(queryset[0]).data)
-            else:
-                return Response(SerializerCargoHazard(queryset, many=True).data)
+            return Response(SerializerCargoHazard(queryset, many=True).data)
         else:
             message = 'Couldn\'t find a cargos hazards'
             raise serializers.ValidationError(message)

@@ -39,10 +39,7 @@ class APIViewOKOPF(APIView):
         queryset = LegalType.objects.filter(**query_params)
 
         if queryset:
-            if len(queryset) == 1:
-                return Response(SerializerLegalType(queryset[0]).data)
-            else:
-                return Response(SerializerLegalType(queryset, many=True).data)
+            return Response(SerializerLegalType(queryset, many=True).data)
         else:
             message = 'Couldn\'t find a legal types'
             raise serializers.ValidationError(message)

@@ -45,10 +45,7 @@ class APIViewOKV(APIView):
         queryset = Currency.objects.filter(**query_params)
 
         if queryset:
-            if len(queryset) == 1:
-                return Response(SerializerCurrency(queryset[0]).data)
-            else:
-                return Response(SerializerCurrency(queryset, many=True).data)
+            return Response(SerializerCurrency(queryset, many=True).data)
         else:
             if query_params:
                 message = f'Couldn\'t find a currencies with params: {query_params}'
